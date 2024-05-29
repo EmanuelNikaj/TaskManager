@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management</title>
+    <style>
+        body {
+            font-family: Arial;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        #taskInput {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        #addBtn {
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            float: right;
+        }
+
+        .task {
+            background-color: #f4f4f4;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Task Management</h2>
+        <input id="taskInput" placeholder="Add new task...">
+        <button id="addBtn">Add Task</button>
+        <div id="taskList"></div>
+    </div>
+
+    <script>
+        // task input
+        const taskInput = document.getElementById('taskInput');
+
+        // addBtn
+        const addBtn = document.getElementById('addBtn');
+
+        // taskList
+        const taskList = document.getElementById('taskList');
+
+        addBtn.addEventListener('click', function () {
+            const taskText = taskInput.value;
+            if (taskText.trim() !== '') {
+                addTask(taskText);
+                taskInput.value = '';
+            }
+        });
+
+        function addTask(taskText) {
+            const taskItem = document.createElement("div");
+            taskItem.className = 'task';
+            taskItem.innerHTML = `
+                <span>${taskText}</span>
+                <button class='delete-btn'>Delete</button>
+            `;
+            taskList.appendChild(taskItem);
+
+            const deleteBtn = taskItem.querySelector('.delete-btn');
+            deleteBtn.addEventListener('click', function () {
+                taskItem.remove();
+            });
+        }
+    </script>
+</body>
+
+</html>
+
+<!--When using a class is usable for multiple elements and when we want to style it we use .
+But when we use the id is unique for an element and when we want to stlye it we use # -->
